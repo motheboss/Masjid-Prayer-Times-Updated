@@ -1,0 +1,14 @@
+{
+  "name": "Geometric",
+  "background": "#F3EBDD",
+  "card": "#FFFFFF",
+  "accent": "#B5482F",
+  "text": "#1B2A41",
+  "mutedText": "#6C7A89",
+  "border": "#D9CDB8",
+  "backgroundImage": "",
+  "pattern": "/patterns/geometric.png",
+  "glow": "#B5482F",
+  "fontHeading": "var(--font-heading)",
+  "fontBody": "var(--font-body)"
+}

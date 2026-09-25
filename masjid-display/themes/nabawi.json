@@ -1,0 +1,17 @@
+{
+  "name": "Masjid an-Nabawi",
+  "background": "#06392B",
+  "card": "#06392BC2",
+  "accent": "#F2FFF8",
+  "text": "#FFFFFF",
+  "mutedText": "#B5E3CF",
+  "border": "#3DDC9777",
+  "backgroundImage": "/backgrounds/nabawi-horizontal.jpg",
+  "backgroundImageVertical": "/backgrounds/nabawi-vertical.jpg",
+  "backgroundPosition": "center",
+  "backgroundPositionVertical": "center top",
+  "pattern": "/patterns/nabawi.png",
+  "glow": "#3DDC97",
+  "fontHeading": "var(--font-heading)",
+  "fontBody": "var(--font-body)"
+}

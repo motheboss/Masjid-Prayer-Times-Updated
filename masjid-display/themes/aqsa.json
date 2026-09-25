@@ -1,0 +1,17 @@
+{
+  "name": "Al-Aqsa",
+  "background": "#0A1B45",
+  "card": "#0A1B45C2",
+  "accent": "#F5C542",
+  "text": "#FFFFFF",
+  "mutedText": "#BCC8E8",
+  "border": "#F5C54277",
+  "backgroundImage": "/backgrounds/aqsa-horizontal.jpg",
+  "backgroundImageVertical": "/backgrounds/aqsa-vertical.jpg",
+  "backgroundPosition": "center",
+  "backgroundPositionVertical": "center top",
+  "pattern": "/patterns/aqsa.png",
+  "glow": "#F5C542",
+  "fontHeading": "var(--font-heading)",
+  "fontBody": "var(--font-body)"
+}

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { margin: 0; background: var(--bg, #0E2A24); overflow-x: hidden; }
+
+.ticker-track { display: flex; width: max-content; white-space: nowrap; animation: ticker linear infinite; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+.text-glow { text-shadow: 0 0 22px var(--glow); }
+
+.on-photo { text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7); }

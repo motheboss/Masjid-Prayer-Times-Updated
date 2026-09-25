@@ -1,0 +1,15 @@
+{
+  "name": "Default",
+  "background": "#0E2A24",
+  "card": "#153A32",
+  "accent": "#E3B95C",
+  "text": "#F4EEDD",
+  "mutedText": "#8FB0A5",
+  "border": "#2A5A4D",
+  "backgroundImage": "",
+  "pattern": "",
+  "glow": "#E3B95C",
+  "fontHeading": "var(--font-heading)",
+  "fontBody": "var(--font-body)",
+  "gradient": "radial-gradient(ellipse at 50% 0%, #1b4a3f 0%, transparent 65%)"
+}

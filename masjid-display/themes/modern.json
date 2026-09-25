@@ -1,0 +1,14 @@
+{
+  "name": "Modern",
+  "background": "#0B0D12",
+  "card": "#151922",
+  "accent": "#5CE1C6",
+  "text": "#F2F4F8",
+  "mutedText": "#8B93A5",
+  "border": "#232936",
+  "backgroundImage": "",
+  "pattern": "",
+  "glow": "#5CE1C6",
+  "fontHeading": "var(--font-heading)",
+  "fontBody": "var(--font-body)"
+}

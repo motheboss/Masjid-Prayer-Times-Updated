@@ -1,0 +1,17 @@
+{
+  "name": "Masjid al-Haram",
+  "background": "#000000",
+  "card": "#000000C7",
+  "accent": "#D4AF37",
+  "text": "#FFFFFF",
+  "mutedText": "#D9CFB4",
+  "border": "#D4AF37AA",
+  "backgroundImage": "/backgrounds/haram-horizontal.jpg",
+  "backgroundImageVertical": "/backgrounds/haram-vertical.jpg",
+  "backgroundPosition": "30% center",
+  "backgroundPositionVertical": "top center",
+  "pattern": "/patterns/haram.png",
+  "glow": "#D4AF37",
+  "fontHeading": "var(--font-heading)",
+  "fontBody": "var(--font-body)"
+}
