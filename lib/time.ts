@@ -65,11 +65,24 @@ export function buildDisplaySchedule(times: PrayerTimes, settings: IqamahSetting
   });
 }
 
-/** Jumu'ah's fixed display time: the per-date CSV value if present, else the static time set on /admin/iqamah. */
+/**
+ * Jumu'ah's fixed display time: the per-date CSV value if present, else the
+ * static time set on /admin/iqamah, else 1:10 PM.
+ *
+ * Uses `||` rather than `??` on purpose at both steps: a CSV upload with an
+ * empty `jumua` cell (or a DB row where that column is an empty string rather
+ * than null) is falsy but not strictly `null`/`undefined`, so `??` would let
+ * "" through and `resolveJumuahTime` would return "" instead of falling back -
+ * which is what was reaching <PrayerDisplayVertical>/<PrayerDisplayHorizontal>
+ * as `jumuahTime` and tripping the ViewProps type ("" widened to `string | null`
+ * upstream). `||` treats "" the same as missing, so this always returns a
+ * genuine, non-empty string.
+ */
 export function resolveJumuahTime(times: PrayerTimes, settings: IqamahSetting[]): string {
-  if (times.jumuah) return times.jumuah;
-  const s = settings.find((x) => x.prayer_name === "jumuah");
-  return s?.fixed_time ?? "13:10";
+  const csv = times.jumuah;
+  if (csv) return csv;
+  const fixed = settings.find((x) => x.prayer_name === "jumuah")?.fixed_time;
+  return fixed || "13:10";
 }
 
 /** Five daily prayers for `day`. On Fridays Dhuhr is replaced by Jumu'ah. */

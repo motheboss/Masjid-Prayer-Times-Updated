@@ -15,8 +15,16 @@ interface Data {
   theme: Theme | null; weather: Weather | null; layout: Layout; mode: "api" | "csv"; screenName: string | null;
 }
 
-/** Shared by /display (no screen id, uses query params + the legacy `themes.active` flag)
- *  and /display/[id] (per-screen layout/theme/mode, read from Supabase's `screens` table). */
+// Absolute last line of defense: whatever resolveJumuahTime (or a bad DB row) hands back,
+// this always produces a real, non-empty string.
+function safeJumuahTime(times: PrayerTimes | null, settings: IqamahSetting[]): string {
+  if (!times) return "13:10";
+  const resolved = resolveJumuahTime(times, settings);
+  return resolved || "13:10";
+}
+
+/** TV/kiosk display only. For phones, use /mobile instead - it has its own
+ *  layout and does not run this component's screen-scaling logic at all. */
 export default function DisplayClient({ apiUrl, layoutOverride }: { apiUrl: string; layoutOverride?: Layout | null }) {
   const [data, setData] = useState<Data | null>(null);
   const [now, setNow] = useState<Date | null>(null);
@@ -76,10 +84,12 @@ export default function DisplayClient({ apiUrl, layoutOverride }: { apiUrl: stri
     );
   }
 
+  const jumuahTime: string = safeJumuahTime(data.times, data.settings);
+
   const props = {
     schedule: view.schedule, status: view.status, now, weather: data.weather,
     hijri: hijriDate(now), gregorian: gregorianDate(now),
-    jumuahTime: resolveJumuahTime(data.times, data.settings),
+    jumuahTime,
     announcements: [...data.announcements, ...autoAnnouncements(view.statusSchedule, now)],
   };
 

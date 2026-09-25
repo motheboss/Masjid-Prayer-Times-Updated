@@ -3,6 +3,7 @@ import AnnouncementsTicker from "./AnnouncementsTicker";
 import PrayerList from "./PrayerList";
 import CountdownCorner from "./CountdownCorner";
 import { Clock, ViewProps, WeatherBadge } from "./DisplayHeader";
+import { MASJID_NAME } from "@/lib/theme";
 
 /** The photo fills the whole screen; the clock sits over it top-left, the prayer
  *  table floats as a translucent panel on the right, and the countdown lives in
@@ -14,7 +15,8 @@ export default function PrayerDisplayHorizontal(p: ViewProps) {
         <section className="flex min-h-0 flex-col justify-between">
           <header className="flex items-start justify-between on-photo">
             <div>
-              <p className="text-4xl font-semibold">{p.gregorian}</p>
+              <p className="font-heading text-xl font-semibold uppercase tracking-wide text-accent">{MASJID_NAME}</p>
+              <p className="mt-2 text-4xl font-semibold">{p.gregorian}</p>
               <p className="mt-1 text-3xl text-accent">{p.hijri}</p>
             </div>
             <WeatherBadge weather={p.weather} />

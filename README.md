@@ -82,3 +82,42 @@ job computes "today" correctly for the masjid's local time rather than the serve
 ### Unchanged
 The blackout screen, the theme CSS-variable system (`ThemeLoader`), announcement ticker, iqamah
 offset/static settings, and Supabase auth on the admin panel all work exactly as before.
+
+
+## Rebuild: masjid name + a real mobile page
+
+### What changed
+- **`components/DisplayClient.tsx`** was reverted to its clean form. It had picked up a
+  hand-patched `?mobile=1` override that reused the desktop/TV font-scaling logic at a
+  fixed 16px - that's what caused the "zoomed out, doesn't adapt" look on a phone,
+  since it only touched font-size, not the underlying `h-screen`/grid TV layout. That
+  patch is gone; `/mobile` (below) replaces the need for it entirely.
+- **`app/mobile/page.tsx`** is a brand-new page, written from scratch, independent of
+  `DisplayClient`/`PrayerDisplayHorizontal`/`PrayerDisplayVertical`. It:
+  - Is a normal scrolling page (no TV screen-scaling code at all).
+  - Wraps its content in the same `<ThemeLoader>` the TV displays use
+    (`layout="vertical"`), so it automatically reflects whichever theme is active in
+    `/api/display` - photo, gradient, pattern, accent color, fonts.
+  - Shows the masjid name, a large clock, the next-prayer countdown, today's five
+    prayers plus Jumu'ah (larger cards: `p-6`, `rounded-3xl`, bigger type than a typical
+    list, meant to be legible at arm's length), the Hijri/Gregorian date, weather (if
+    present), and announcements.
+- **`lib/theme.ts`** gained one constant, `MASJID_NAME = "St. Clair Masjid and Islamic
+  Education Center"`, so the name is defined once and reused by the TV layouts and the
+  mobile page rather than typed out three times.
+- **`components/PrayerDisplayHorizontal.tsx`** and **`PrayerDisplayVertical.tsx`**: the
+  masjid name now appears above the date in the header, in the theme's accent color -
+  it doesn't compete with the clock or the prayer table for space.
+
+### Unchanged (verified, not just assumed)
+Every other file - `lib/time.ts`, `lib/prayerTimes.ts`, `lib/screens.ts`,
+`lib/supabase.ts`, `ThemeLoader.tsx`, `PrayerList.tsx`, `CountdownCorner.tsx`,
+`IqamahMode.tsx`, `AnnouncementsTicker.tsx`, all API routes, all admin pages, all theme
+JSON, all SQL, all env/config files - was diffed against the uploaded ZIP and is
+byte-for-byte identical. Nothing there needed patching.
+
+### After redeploying
+No new environment variables and no schema changes - `/mobile` reads from the same
+`/api/display` endpoint everything else does. Once Supabase is wiped and reseeded per
+the existing `supabase/schema.sql` → `schema-v2.sql` → `themes-seed.sql` order, `/mobile`
+will work immediately alongside `/display` and `/display/[id]`.

@@ -7,6 +7,9 @@ import aqsa from "@/themes/aqsa.json";
 
 export type Layout = "horizontal" | "vertical";
 
+/** Shown on every display (TV and mobile) so it never has to be typed twice. */
+export const MASJID_NAME = "St. Clair Masjid and Islamic Education Center";
+
 export interface Theme {
   name?: string;
   background: string;
