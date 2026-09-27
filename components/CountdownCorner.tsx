@@ -6,11 +6,20 @@ export default function CountdownCorner({
   label, name, ms, side = "left", className = "",
 }: { label: string; name: string; ms: number; side?: "left" | "right"; className?: string }) {
   return (
-    <div className={`inline-flex flex-col ${side === "right" ? "items-end text-right" : "items-start text-left"} on-photo ${className}`}>
-      <p className="text-xl text-muted">{label}</p>
-      <div className="flex items-baseline gap-4">
-        <span className="font-heading text-3xl font-bold">{name}</span>
-        <span className="font-heading text-4xl font-bold tabular-nums text-accent drop-shadow-glow">{formatCountdown(ms)}</span>
+    <div
+      className={`inline-flex flex-col ${
+        side === "right" ? "items-end text-right" : "items-start text-left"
+      } on-photo ${className}`}
+    >
+      {/* Label */}
+      <p className="text-3xl font-semibold text-muted tracking-wide">{label}</p>
+
+      {/* Prayer name + countdown */}
+      <div className="flex items-baseline gap-6 mt-2">
+        <span className="font-heading text-5xl font-bold">{name}</span>
+        <span className="font-heading text-7xl font-extrabold tabular-nums text-accent drop-shadow-glow">
+          {formatCountdown(ms)}
+        </span>
       </div>
     </div>
   );

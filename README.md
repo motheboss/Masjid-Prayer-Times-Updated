@@ -121,3 +121,17 @@ No new environment variables and no schema changes - `/mobile` reads from the sa
 `/api/display` endpoint everything else does. Once Supabase is wiped and reseeded per
 the existing `supabase/schema.sql` → `schema-v2.sql` → `themes-seed.sql` order, `/mobile`
 will work immediately alongside `/display` and `/display/[id]`.
+
+## Mobile app (Expo, `mobile/app/`)
+Tabs: Home, My Masjid, Timings, Qur'an, Donations. Reuses this project's Supabase tables (`prayer_times`, `iqamah_settings`) directly and calls two new server routes added here for Stripe Terminal: `app/api/stripe/terminal/connection-token` and `.../payment-intent`.
+
+```bash
+cd mobile/app
+npm install
+cp .env.example .env      # fill in Supabase + this web app's deployed URL
+npx expo prebuild
+npx expo run:ios      # or: npx expo run:android
+```
+Requires a custom dev build (`expo run:ios`/`run:android` or `eas build`), not Expo Go - the Stripe Terminal native SDK can't run there. Add `STRIPE_SECRET_KEY` to this web app's env vars for the Terminal routes to work, and enable Terminal + register a reader in your Stripe Dashboard.
+
+Kiosk mode (My Masjid tab) hides every tab but Donations - real on both platforms. For a hard OS-level lock nothing else can exit, iOS needs Guided Access or MDM (Apple Business Manager); Android can additionally use `startLockTask` as a device owner - neither is app code, both are device/account configuration.

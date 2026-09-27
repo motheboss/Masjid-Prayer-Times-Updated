@@ -15,15 +15,15 @@ export default function PrayerDisplayHorizontal(p: ViewProps) {
         <section className="flex min-h-0 flex-col justify-between">
           <header className="flex items-start justify-between on-photo">
             <div>
-              <p className="font-heading text-xl font-semibold uppercase tracking-wide text-accent">{MASJID_NAME}</p>
-              <p className="mt-2 text-4xl font-semibold">{p.gregorian}</p>
-              <p className="mt-1 text-3xl text-accent">{p.hijri}</p>
+              <p className="font-heading text-3xl font-semibold uppercase tracking-wide text-accent">{MASJID_NAME}</p>
+              <p className="mt-2 text-6xl font-semibold">{p.gregorian}</p>
+              <p className="mt-1 text-5xl text-accent">{p.hijri}</p>
             </div>
             <WeatherBadge weather={p.weather} />
           </header>
 
           <div className="on-photo">
-            <Clock now={p.now} className="text-[9rem] leading-none" />
+            <Clock now={p.now} className="text-[14rem] leading-none" />
           </div>
 
           <CountdownCorner
@@ -33,7 +33,7 @@ export default function PrayerDisplayHorizontal(p: ViewProps) {
           />
         </section>
 
-        <aside className="ml-auto flex w-[36rem] max-w-full flex-col justify-center">
+        <aside className="ml-auto flex w-[60rem] max-w-full flex-col justify-center">
           <PrayerList schedule={p.schedule} status={p.status} jumuahTime={p.jumuahTime} />
         </aside>
       </div>
