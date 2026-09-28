@@ -20,9 +20,35 @@
         }
       ]
     ],
-    "ios": { ... },
-    "android": { ... },
-    "extra": { ... },
+
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "org.scmec.mobile",
+      "infoPlist": {
+        "NSBluetoothAlwaysUsageDescription": "Used to connect to the Stripe card reader for donations.",
+        "NSLocationWhenInUseUsageDescription": "Used to discover nearby Stripe card readers.",
+        "UIBackgroundModes": ["bluetooth-central"]
+      }
+    },
+
+    "android": {
+      "package": "org.scmec.mobile",
+      "permissions": [
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_CONNECT",
+        "BLUETOOTH_SCAN",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+
+    "extra": {
+      "eas": {
+        "projectId": "fec45daf-9085-498f-8997-091b071da65f"
+      }
+    },
+
     "owner": "moelmsallati"
   }
 }
