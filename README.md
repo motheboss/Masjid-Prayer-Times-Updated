@@ -123,7 +123,7 @@ the existing `supabase/schema.sql` → `schema-v2.sql` → `themes-seed.sql` ord
 will work immediately alongside `/display` and `/display/[id]`.
 
 ## Mobile app (Expo, `mobile/app/`)
-Tabs: Home, My Masjid, Timings, Qur'an, Donations. Reuses this project's Supabase tables (`prayer_times`, `iqamah_settings`) directly and calls two new server routes added here for Stripe Terminal: `app/api/stripe/terminal/connection-token` and `.../payment-intent`.
+Tabs: Home, My Masjid, Timings, Qur'an, Donations. Reuses this project's Supabase tables (`prayer_times`, `iqamah_settings`) directly and calls two new server routes added here for Stripe Terminal: `app/api/stripe/terminal/create-connection-token` and `.../payment-intent`.
 
 ```bash
 cd mobile/app

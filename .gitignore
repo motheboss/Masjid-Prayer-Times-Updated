@@ -1,4 +1,11 @@
 node_modules
 .next
+.env
 .env.local
+.env*.local
 next-env.d.ts
+.expo
+mobile/app/.env
+mobile/app/node_modules
+mobile/app/ios
+mobile/app/android
