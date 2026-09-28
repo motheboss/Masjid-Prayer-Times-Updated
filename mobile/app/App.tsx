@@ -4,12 +4,16 @@ import { StatusBar } from "expo-status-bar";
 import { activateKeepAwakeAsync } from "expo-keep-awake";
 import { KioskProvider } from "./src/context/KioskContext";
 import AppNavigator from "./src/navigation/AppNavigator";
-import { fetchConnectionToken } from "./src/lib/stripeTerminalApi";
-import { StripeTerminalProvider, terminalAvailable } from "./src/lib/terminalNative";
+
+// Stripe Terminal disabled for Expo Go
+// import { StripeTerminalProvider, terminalAvailable } from "./src/lib/terminalNative";
+// import { fetchConnectionToken } from "./src/lib/stripeTerminalApi";
 
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { error: Error | null }> {
   state = { error: null as Error | null };
-  static getDerivedStateFromError(error: Error) { return { error }; }
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
   render() {
     if (!this.state.error) return this.props.children;
     return (
@@ -21,17 +25,15 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { err
   }
 }
 
+// Terminal wrapper disabled for Expo Go
 function TerminalWrapper({ children }: { children: React.ReactNode }) {
-  if (!terminalAvailable || !StripeTerminalProvider) return <>{children}</>;
-  return (
-    <StripeTerminalProvider logLevel="error" tokenProvider={fetchConnectionToken}>
-      {children}
-    </StripeTerminalProvider>
-  );
+  return <>{children}</>;
 }
 
 export default function App() {
-  React.useEffect(() => { activateKeepAwakeAsync().catch(() => {}); }, []);
+  React.useEffect(() => {
+    activateKeepAwakeAsync().catch(() => {});
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -46,7 +48,22 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  errorWrap: { flex: 1, backgroundColor: "#06231b", alignItems: "center", justifyContent: "center", padding: 24 },
-  errorTitle: { color: "#e9c86b", fontSize: 20, fontWeight: "800", marginBottom: 8 },
-  errorBody: { color: "#f4f7f5", fontSize: 14, textAlign: "center" },
+  errorWrap: {
+    flex: 1,
+    backgroundColor: "#06231b",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+  },
+  errorTitle: {
+    color: "#e9c86b",
+    fontSize: 20,
+    fontWeight: "800",
+    marginBottom: 8,
+  },
+  errorBody: {
+    color: "#f4f7f5",
+    fontSize: 14,
+    textAlign: "center",
+  },
 });
