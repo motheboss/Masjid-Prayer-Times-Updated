@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { supabase, getServiceClient } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
+import { getAdminClient } from "@/lib/supabaseAdmin";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +34,7 @@ export async function GET(req: Request) {
   const hm = (s: string) => s.slice(0, 5);
 
   const row = { date: dateISO, fajr: hm(t.Fajr), dhuhr: hm(t.Dhuhr), asr: hm(t.Asr), maghrib: hm(t.Maghrib), isha: hm(t.Isha) };
-  const { error } = await getServiceClient().from("prayer_times").upsert(row, { onConflict: "date" });
+  const { error } = await getAdminClient().from("prayer_times").upsert(row, { onConflict: "date" });
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, row });
 }
